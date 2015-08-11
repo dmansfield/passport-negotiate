@@ -1,4 +1,4 @@
 /**
  * db configuration.
  */
-exports.url = 'mongodb://localhost/stargate';
+exports.url = 'mongodb://localhost/loginexample';
