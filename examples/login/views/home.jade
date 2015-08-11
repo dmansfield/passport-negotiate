@@ -1,0 +1,18 @@
+extends layout
+
+block content
+	div.container
+		div.row
+			div.col-sm-6.col-md-4.col-md-offset-4
+				#user
+					h1.text-center.login-title Welcome #{user.firstName}. Check your details below:
+						div.signup-wall
+							ul.user-details
+								li Principal ---> #{user.principal}
+								li Email    ---> #{user.email}
+								li First Name ---> #{user.firstName} 
+								li Last Name ---> #{user.lastName}
+						a(href='/signout', class='text-center new-account') Sign Out
+						a(href='/manageprofile', class='text-center new-account') Manage Profile
+						form#form(action='/deleteprofile', method='POST')
+							a(href='#', onclick="document.getElementById('form').submit()",class='text-center new-account') Delete Profile
