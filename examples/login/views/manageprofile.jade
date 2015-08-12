@@ -2,14 +2,13 @@ extends layout
 
 block content
 	- var buttonText = user && user._id ? "Update profile" : "Register New Profile";
-	- if (user === 0) { user = {}; };
 	div.container
 			div.row
 				div.col-sm-6.col-md-4.col-md-offset-4
 						h1.text-center.login-title Registration Details 
 							div.signup-wall
 								form(class='form-signin', action='/manageprofile', method='POST')
-									input(type='text', name='principal', value=authenticatedPrincipal, class='form-control', placeholder='Principal',required, autofocus, readonly)
+									input(type='text', name='principal', value=user.principal, class='form-control', placeholder='Principal',required, autofocus, readonly)
 									input(type='email', name='email', value=user.email, class='form-control', placeholder='Email',required)
 									input(type='text', name='firstName', value=user.firstName, class='form-control', placeholder='First Name',required)
 									input(type='text', name='lastName', value=user.lastName, class='form-control', placeholder='Last Name',required)
