@@ -41,13 +41,25 @@ typically look like user@REALM.
 
     var NegotiateStrategy = require("passport-negotiate");
     passport.use(new NegotiateStrategy(function(principal, done) {
-          User.findOne({ principal: principal }, function (err, user) {
-            if (err) { return done(err); }
-            if (!user) { return done(null, false); }
-            return done(null, user, REALM);
+        User.findOne({ principal: principal }, function (err, user) {
+            return done(err, user);
         });
       }
     ));
+
+There are some quirks worth noting:
+
+1. You _must not_ use `failureRedirect` when using the authentication method 
+as middleware, because the strategy must generate a 401 status response with 
+a specific header (WWW-Authenticate: Negotiate), which won't happen if 
+`failureRedirect` is used.
+2. Kerberos authentication can succeed, but the supplied `verify` function 
+cannot find a user object for the user.  In this case, a `noUserRedirect` can
+be supplied which will in many respects work the way `failureRedirect` works
+for other strategies. The sample application `examples/login` demonstrates this.
+The strategy will set `req.session.authenticatedPrincipal` to the authenticated 
+principal whenever kerberos authentication has succeeded regardless of the 
+(in-)ability of the `verify` function to supply a user object.
 
 ## Credits
 
