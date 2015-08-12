@@ -9,13 +9,18 @@
 // Because Negotatiate authentication is "seamless" there is no login page
 // in this application.  A user that cannot be authenticated by the underlying
 // kerberos platform will not be able to access any part of the application.
-// The rest of the application demonstrates that kerberos authentication can
-// success but still not have an application-level "user" object.
+// The application also demonstrates that kerberos authentication can
+// succeed but still not have an application-level "user" object.
 //
-// This application then consists of two pages (mainly), /home which shows
+// This application consists of two pages (mainly), /home which shows
 // the profile and /manageprofile which manages it. New users which have been
-// authenticated are forced to create a profile. Profiles can be deleted.
+// authenticated but for whom there is not user object are forced to create a 
+// profile. Profiles can be deleted.
 // 
+// Of particular interest are passport/setup.js and routes/setup.js
+//
+// Please configure a mongo db connection in dbConfig.js 
+//
 
 var flash = require('connect-flash');
 var express = require('express');
