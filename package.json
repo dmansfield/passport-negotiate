@@ -25,7 +25,6 @@
   "dependencies": {
   	"pkginfo": "0.2.x",
   	"kerberos": ">= 0.0.13",
-    "passport": "~0.2.0"
-  }
-  
+	"passport-strategy": "1.x.x"
+   }
 }
