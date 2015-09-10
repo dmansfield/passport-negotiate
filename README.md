@@ -58,7 +58,7 @@ principal whenever kerberos authentication has succeeded regardless of the
 
 #### S4U2Proxy (credential delegation)
 
-The strategy can be configured to obtain delegated principals on 
+The strategy can be configured to obtain delegated credentials on 
 behalf of the authenticated user.  Enable this by passing an options hash as
 the first argument to the strategy constructor:
 
