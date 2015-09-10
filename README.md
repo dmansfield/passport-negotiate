@@ -86,8 +86,9 @@ in the default location using:
 Alternatively, you could use k5start to ensure that the credentials cache is renewed
 and/or recreated so as to be valid over a long period of time
 
-By default the service principal will NOT be enabled for S4U2Proxy.  (This wiki)[http://k5wiki.kerberos.org/wiki/Manual_Testing#Services4User_testing]
-page on the kerberos website includes information on how to set up a principal
+By default the service principal will NOT be enabled for S4U2Proxy. 
+[This wiki page](http://k5wiki.kerberos.org/wiki/Manual_Testing#Services4User_testing)
+on the kerberos website includes information on how to set up a principal
 to allow S4U2Proxy.
 
 ## Credits
