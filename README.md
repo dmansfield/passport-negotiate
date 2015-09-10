@@ -23,12 +23,7 @@ Node.js can also be made to work as a negotiate enabled _client_, see this [Gist
 
 ## Install
 
-Note: at the time of this writing, no released version of the dependent
-package, "kerberos", contains the necessary revisions to support this
-module.  The current version of kerberos is 0.0.12.  Please see this [fork](http://github.com/dmansfield/kerberos).
-
     $ npm install passport-negotiate
-
 
 ## Usage
 
@@ -60,6 +55,7 @@ for other strategies. The sample application `examples/login` demonstrates this.
 The strategy will set `req.session.authenticatedPrincipal` to the authenticated 
 principal whenever kerberos authentication has succeeded regardless of the 
 (in-)ability of the `verify` function to supply a user object.
+
 
 ## Credits
 

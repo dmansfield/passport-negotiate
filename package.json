@@ -1,6 +1,6 @@
 {
   "name": "passport-negotiate",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Negotiate (kerberos) authentication strategy for Passport.",
   "main": "./lib/passport-negotiate",
   "scripts": {
@@ -24,7 +24,7 @@
   "readmeFilename": "README.md",
   "dependencies": {
   	"pkginfo": "0.2.x",
-  	"kerberos": ">= 0.0.12",
+  	"kerberos": ">= 0.0.13",
     "passport": "~0.2.0"
   }
   
