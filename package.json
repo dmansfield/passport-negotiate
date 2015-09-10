@@ -1,6 +1,6 @@
 {
   "name": "passport-negotiate",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Negotiate (kerberos) authentication strategy for Passport.",
   "main": "./lib/passport-negotiate",
   "scripts": {
