@@ -56,6 +56,39 @@ The strategy will set `req.session.authenticatedPrincipal` to the authenticated
 principal whenever kerberos authentication has succeeded regardless of the 
 (in-)ability of the `verify` function to supply a user object.
 
+#### S4U2Proxy (credential delegation)
+
+The strategy can be configured to obtain delegated principals on 
+behalf of the authenticated user.  Enable this by passing an options hash as
+the first argument to the strategy constructor:
+
+    passport.use(new NegotiateStrategy({enableConstrainedDelegation:true}, ...) 
+
+The delegated credentials will be stored in a per-session credentials
+cache (the name of which will be set in `req.session.delegatedCredentialsCache`).
+Currently there is no code to monitor the lifetime of these credentials, so you will
+need to ensure the cache is not expired, and also to remove the cache file
+when the session is closed.
+
+**Note 1**: S4U2Proxy support is currently WIP, and hasn't been rolled into an 
+official release of the `kerberos` module that provides the underlying functionality.
+To get support for S4U2Proxy please use [this fork.](https://github.com/dmansfield/kerberos/tree/s4u)
+The authors are currently working on getting this code merged upstream.
+
+**Note 2**: For S4U2Proxy credentials to be obtained, a credentials cache for the
+server principal (in addition to the keytab) must be established and maintained. 
+For example, supposing the service keytab contains a credential for the principal
+`HTTP/myhost.example.com@MYREALM.COM`, then you could create a credentials cache
+in the default location using:
+
+    kinit -k HTTP/myhost.example.com@MYREALM.COM
+
+Alternatively, you could use k5start to ensure that the credentials cache is renewed
+and/or recreated so as to be valid over a long period of time
+
+By default the service principal will NOT be enabled for S4U2Proxy.  (This wiki)[http://k5wiki.kerberos.org/wiki/Manual_Testing#Services4User_testing]
+page on the kerberos website includes information on how to set up a principal
+to allow S4U2Proxy.
 
 ## Credits
 
