@@ -102,6 +102,7 @@ module.exports = function(app, passport) {
 	});
 	
 	app.get(homeLocation, isAuthenticated, function(req, res) {
+		console.log('available credential cache: ', req.session.delegatedCredentialsCache);
 		res.render('home', {user : req.user, loggedInAt : req.session.loggedInAt});
 	});
 	
