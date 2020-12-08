@@ -3,21 +3,22 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-      "start": "node app.js"
-      , "preinstall" : "npm install ../.."
+    "start": "node app.js",
+    "preinstall": "npm install ../.."
   },
   "dependencies": {
-    "express": "~4.2.0",
-    "morgan": "~1.0.0",
-    "serve-favicon" : "*",
-    "body-parser": "~1.13.3",
-    "cookie-parser": "~1.0.1",
-    "express-session": "~1.0.4",
-    "debug": "~0.7.4",
+    "bcrypt-nodejs": "*",
+    "body-parser": "^1.19.0",
+    "connect-flash": "*",
+    "cookie-parser": "*",
+    "debug": "^4.3.1",
+    "express": "*",
+    "express-session": "*",
     "jade": "~1.3.0",
-    "passport": "~0.2.0",
-    "mongoose": "~3.8.12",
-    "bcrypt-nodejs" : "*",
-    "connect-flash" : "*"
+    "mongoose": "*",
+    "morgan": "^1.10.0",
+    "passport": "*",
+    "passport-negotiate": "file:../..",
+    "serve-favicon": "*"
   }
 }
