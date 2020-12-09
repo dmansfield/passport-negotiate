@@ -7,24 +7,30 @@
     "test": "echo \"Error: no test specified! Configure in package.json\" && exit 1"
   },
   "repository": {
-  	"type":"git",
-  	"url":"git://github.com/dmansfield/passport-negotiate.git"
+    "type": "git",
+    "url": "git://github.com/dmansfield/passport-negotiate.git"
   },
   "bugs": {
-  	"url": "http://github.com/dmansfield/passport-negotiate/issues"
+    "url": "http://github.com/dmansfield/passport-negotiate/issues"
   },
   "keywords": [
-    "node.js","passport","negotiate","kerberos","spnego","gssapi","authentication"
+    "node.js",
+    "passport",
+    "negotiate",
+    "kerberos",
+    "spnego",
+    "gssapi",
+    "authentication"
   ],
   "author": {
-  	"name":"David Mansfield"
-  	,"email":"dmansfield@gmail.com"
+    "name": "David Mansfield",
+    "email": "dmansfield@gmail.com"
   },
   "license": "MIT",
   "readmeFilename": "README.md",
   "dependencies": {
-  	"pkginfo": "0.2.x",
-  	"kerberos": ">= 0.0.15",
-	"passport-strategy": "1.x.x"
-   }
+    "pkginfo": "0.2.x",
+    "kerberos": ">= 0.0.15",
+    "passport-strategy": "1.x.x"
+  }
 }
