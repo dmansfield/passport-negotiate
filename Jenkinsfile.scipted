@@ -1,0 +1,85 @@
+node {
+
+    def isStartedByUser = currentBuild.rawBuild.getCause(hudson.model.Cause$UserIdCause) != null
+    def userInput = ""
+    def gitRevision
+    def dockerImageTag
+    def allowedBranches4AutoDeloy = ['master']
+
+    stage('User to customize the run') {
+        if (isStartedByUser) {  // Triggered by user
+            def branches = sh (
+                script: "git branch -r --sort=committerdate | grep -v 'origin/HEAD' | sed 's#origin/##g'",
+                returnStdout: true
+            ).trim()
+
+            def gitTags = sh (
+                script: "git tag",
+                returnStdout: true
+            ).trim()
+
+            // TODO: call DTR and initialize image_tags with available image tags
+            def dockerImageTags = '1.0\n2.0\n3.0'
+
+            timeout(time:120, unit:'SECONDS') {
+                userInput = input message: 'Select what to build and/or deploy',
+                    parameters: [
+                        choice(
+                            choices: "Select branch name or git tag\n${branches}\n${gitTags}",
+                            description: 'Branch name or tag to build (and deploy if below is NOT ticked).\n Docker image tag will be ignored if branch/tag is selected.', 
+                            name: 'REVISION_TO_BUILD'
+                        ),
+                        booleanParam(defaultValue: false, 
+                            description: "Tick to only build docker image out of code (No deploy).", 
+                            name: 'BUILD_ONLY'),
+                        choice(
+                            choices: "Select Docker image tag to deploy\n${dockerImageTags}",
+                            description: 'Docker image tag to deploy (mutually exclusive to branch/tag options)', 
+                            name: 'DOCKER_IMAGE_TAG'
+                        )
+                    ]
+            }
+        }
+        else {
+            echo "Not required."
+        }
+    }
+
+    stage('Clone sources') {
+        checkout scm
+    }
+
+    stage('Install dependencies') {
+        sh 'npm install'
+    }
+
+    stage('Test code') {
+        echo "npm test"
+    }
+
+    stage('Build Docker Image and Publish to DTR') {
+        if ( userInput.indexOf("Build") != -1 || 
+            (env.BRANCH_NAME in allowedBranches4AutoDeloy && ! isStartedByUser)
+        ) 
+        {
+            echo "Built ${env.BRANCH_NAME} and published to DTR."
+            dockerImageTag = "${env.BRANCH_NAME}-${env.BUILD_NUMBER}"
+            echo "Set dockerImageTag according to this build (${dockerImageTag})"
+        }
+        else {
+            echo "Not required."
+        }
+    }    
+
+    stage('Deploy Docker Image') {
+        if ( userInput.indexOf("Deploy") != -1 || 
+            (env.BRANCH_NAME in allowedBranches4AutoDeloy && ! isStartedByUser)
+        ) 
+        {
+            echo "Deployed ${dockerImageTag}"
+        }
+        else {
+            echo "Not required."
+        }
+    }    
+}
